@@ -2,7 +2,7 @@ import type { KyTucXa } from '@/services/KyTucXa/typing';
 import rules from '@/utils/rules';
 import { resetFieldsForm } from '@/utils/utils';
 import { Button, Card, Checkbox, Col, Form, Input, InputNumber, Row, Select } from 'antd';
-import { InfoCircleOutlined } from '@ant-design/icons';
+import { InfoCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import UploadFile from '@/pages/KyTucXa/Phong/components/UploadFile';
 import { useEffect } from 'react';
 import { useIntl, useModel } from 'umi';
@@ -183,12 +183,14 @@ const FormPhongKTX = () => {
 										<Col span={8} key={item.ma}>
 											<Checkbox value={item.ma}>
 												<span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-													{item.anh && (
+													{item.anh ? (
 														<img 
 															src={item.anh} 
 															alt='icon' 
 															style={{ width: 18, height: 18, objectFit: 'contain', borderRadius: 2 }} 
 														/>
+														) : (
+															<QuestionCircleOutlined style={{ width: 18, height: 18, objectFit: 'contain', borderRadius: 2 }}/>
 													)}
 													{item.ten}
 												</span>

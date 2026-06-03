@@ -76,6 +76,7 @@ declare module KyTucXa {
 			tienIchChung?: boolean;
 		}
 		anh?: string;
+		ghiChu?: string;
 	}
 
 	export interface ITienIch {

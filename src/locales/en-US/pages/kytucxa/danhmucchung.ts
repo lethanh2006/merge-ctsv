@@ -1,0 +1,28 @@
+export default {
+    'kytucxa.danhmucchung.ma': 'Code',
+    'kytucxa.danhmucchung.ten': 'Name',
+    'kytucxa.danhmucchung.loai': 'Type',
+    'kytucxa.danhmucchung.icon': 'Icon',
+    'kytucxa.danhmucchung.ghichu': 'Note',
+    'kytucxa.danhmucchung.actions': 'Actions',
+    'kytucxa.danhmucchung.edit': 'Edit',
+    'kytucxa.danhmucchung.xacnhanxoa': 'Are you sure you want to delete this type?',
+    'kytucxa.danhmucchung.delete': 'Delete',
+    'kytucxa.danhmucchung.title': 'General Category Management',
+
+    'kytucxa.danhmucchung.chitiet': 'Category Details ',
+    'kytucxa.danhmucchung.editTitle': 'Edit Category',
+    'kytucxa.danhmucchung.addTitle': 'Add New Category',
+    'kytucxa.danhmucchung.nhapma': 'Enter code',
+    'kytucxa.danhmucchung.maloai': 'Category type',
+    'kytucxa.danhmucchung.nhapten': 'Enter name',
+    'kytucxa.danhmucchung.tienichchung': 'Common amenity',
+    'kytucxa.danhmucchung.nhapghichu': 'Enter note',
+    'kytucxa.danhmucchung.anhicon': 'Icon Image',
+    'kytucxa.danhmucchung.add': 'Add new',
+    'kytucxa.danhmucchung.save': 'Save',
+    'kytucxa.danhmucchung.close': 'Close',
+    'kytucxa.danhmucchung.cancel': 'Cancel',
+
+    'kytucxa.danhmucchung.chonmaloai': 'Select category',
+};

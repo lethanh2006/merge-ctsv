@@ -1,7 +1,7 @@
 import { KyTucXa } from '@/services/KyTucXa/typing';
 import { Select } from 'antd';
 import { useEffect, useMemo } from 'react';
-import { useModel } from 'umi';
+import { useModel, useIntl } from 'umi';
 
 const SelectLoaiDanhMucChung = (props: {
 	value?: string;
@@ -14,6 +14,7 @@ const SelectLoaiDanhMucChung = (props: {
 	selectMa?: boolean;
 	disabled?: boolean;
 }) => {
+	const intl = useIntl();
 	const { value, onChange, multiple, allowClear, style, condition, selectMa, disabled } = props;
 	const { danhSach, getAllLoaiDanhMucChungPublicModel } = useModel('kytucxa.loaidanhmucchung');
 
@@ -46,7 +47,7 @@ const SelectLoaiDanhMucChung = (props: {
 			}))}
 			showSearch
 			optionFilterProp='label'
-			placeholder='Chọn mã loại'
+			placeholder={intl.formatMessage({ id: 'kytucxa.danhmucchung.chonmaloai' })}
 			style={{ width: '100%', ...style }}
 			showArrow
 		/>
