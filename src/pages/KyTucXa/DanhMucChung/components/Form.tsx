@@ -22,10 +22,11 @@ const FormThemMoi = () => {
 
 			if (values.maLoai !== 'TIEN_ICH_PHONG') {
 				delete values.cauHinh;
-			} else if (!values?.cauHinh?.tienIchChung) {
-				values.cauHinh = null;
 			} else {
-				values.cauHinh = { ...(values.cauHinh || {}), tienIchChung: true };
+				values.cauHinh = {
+					...(values.cauHinh || {}),
+					tienIchChung: !!values?.cauHinh?.tienIchChung,
+				};
 			}
 
 			if (edit) await putModel(record?._id ?? '', values);

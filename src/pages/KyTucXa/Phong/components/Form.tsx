@@ -66,13 +66,13 @@ const FormPhongKTX = () => {
 	const onFinish = async (values: KyTucXa.IPhongKTX) => {
 		try {
 			const danhSachAnh = await buildUpLoadMultiFile(values, 'danhSachAnh');
-			const { dangKyKyTucXaRule, danhSachTienIch, ...restValues } = values as any;
+			const { dangKyKyTucXaRule, danhSachTienIch, tienIchIds, ...restValues } = values as any;
 			const nationality = dangKyKyTucXaRule?.quocTichPhong;
 			
 			const rulePayload = { ...(dangKyKyTucXaRule || {}) };
 			delete rulePayload.quocTichPhong;
 
-			const maDanhMucList = danhSachTienIch?.maDanhMucTienIch || [];
+			const maDanhMucList = tienIchIds || [];
 			const formattedTienIch = Array.isArray(maDanhMucList)
 				? maDanhMucList.map((id: string) => ({
 					maDanhMucTienIch: id,
