@@ -14,7 +14,7 @@ const PhongKTXPage = () => {
 	const { danhSach: danhSachToaNha, getAllModel: getAllToaNha } = useModel('kytucxa.toa');
 	const { getModel, page, limit, handleEdit } = useModel('kytucxa.phong');
 	const { danhSach: danhSachKhoanThu, getAllModel: getAllKhoanThu } = useModel('kytucxa.khoanthu');
-	const { danhSach: danhSachTienIchAll, getAllModel: getAllTienIch } = useModel('kytucxa.tienich');
+	const { danhSach: danhSachTienIchAll, getAllModel: getAllTienIch } = useModel('kytucxa.danhmucchung');
 
 	useEffect(() => {
 		getAllToaNha();

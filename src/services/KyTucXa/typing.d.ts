@@ -91,4 +91,18 @@ declare module KyTucXa {
         ghiChu: string;
         soLuongDon: number;
     }
+
+	export interface ILoaiDanhMucChung {
+		_id: string;
+		ma: string;
+		maLoai: string;
+		ten: string;
+		tenEn?: string | null;
+		ghiChu: string | null;
+		anh: string | null;
+		dataPartitionCode: string | null;
+		createdAt?: string;
+		updatedAt?: string;
+	}
+
 }

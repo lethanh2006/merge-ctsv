@@ -845,6 +845,11 @@
 				path: 'ky-tuc-xa',
 				routes: [
 					{
+						name: 'DanhMucChung',
+						path: 'danh-muc-chung',
+						component: 'KyTucXa/DanhMucChung',
+					},
+					{
 						name: 'KhoanThu',
 						path: 'khoan-thu',
 						component: 'KyTucXa/CauHinhKhoanThu',
