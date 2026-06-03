@@ -1,6 +1,7 @@
 export default {
     'kytucxa.phong.title': 'Cấu hình phòng',
     'kytucxa.phong.cauHinhPhongText': 'cấu hình phòng',
+    'kytucxa.phong.thongTinPhong': 'Thông tin phòng',
     
     'kytucxa.phong.ma': 'Mã',
     'kytucxa.phong.maPhong': 'Mã phòng',
@@ -33,8 +34,10 @@ export default {
     'kytucxa.phong.anhDaiDien': 'Ảnh đại diện',
     'kytucxa.phong.hienThiTongQuan': 'hiển thị tổng quan phòng.',
     'kytucxa.phong.quyDinhDangKy': 'Quy định đăng ký',
-    'kytucxa.phong.vietnamese': 'Dành cho sinh viên Việt Nam',
-    'kytucxa.phong.international': 'Dành cho sinh viên quốc tế',
+    'kytucxa.phong.danhChoSinhVien': 'Dành cho sinh viên',
+    'kytucxa.phong.chonQuocTich': 'Chọn quốc tịch',
+    'kytucxa.phong.vietnamese': 'Việt Nam',
+    'kytucxa.phong.international': 'Quốc tế',
     'kytucxa.phong.gioiTinhChoPhep': 'Giới tính cho phép',
     'kytucxa.phong.chonGioiTinh': 'Chọn giới tính',
     'kytucxa.phong.nam': 'Nam',

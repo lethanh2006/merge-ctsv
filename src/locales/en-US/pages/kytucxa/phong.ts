@@ -1,6 +1,7 @@
 export default {
     'kytucxa.phong.title': 'Room Configuration',
     'kytucxa.phong.cauHinhPhongText': 'room configuration',
+    'kytucxa.phong.thongTinPhong': 'Room Information',
     
     'kytucxa.phong.ma': 'Code',
     'kytucxa.phong.maPhong': 'Room Code',
@@ -33,8 +34,10 @@ export default {
     'kytucxa.phong.anhDaiDien': 'cover image',
     'kytucxa.phong.hienThiTongQuan': 'displaying the room overview.',
     'kytucxa.phong.quyDinhDangKy': 'Registration Rules',
-    'kytucxa.phong.vietnamese': 'For Vietnamese Students',
-    'kytucxa.phong.international': 'For International Students',
+    'kytucxa.phong.danhChoSinhVien': 'For Students',
+    'kytucxa.phong.chonQuocTich': 'Select Nationality',
+    'kytucxa.phong.vietnamese': 'Vietnamese',
+    'kytucxa.phong.international': 'International',
     'kytucxa.phong.gioiTinhChoPhep': 'Allowed Gender',
     'kytucxa.phong.chonGioiTinh': 'Select Gender',
     'kytucxa.phong.nam': 'Male',

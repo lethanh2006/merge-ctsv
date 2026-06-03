@@ -98,6 +98,7 @@ const PhongKTXPage = () => {
 			modelName='kytucxa.phong'
 			title={intl.formatMessage({ id: 'kytucxa.phong.title' })}
 			Form={Form}
+			widthDrawer={650}
 			rowSelection
 			deleteMany
 			otherButtons={customButtons}

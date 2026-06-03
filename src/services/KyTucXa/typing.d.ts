@@ -72,6 +72,10 @@ declare module KyTucXa {
 		maLoai: string;
 		ma: string;
 		ten: string;
+		cauHinh?: {
+			tienIchChung?: boolean;
+		}
+		anh?: string;
 	}
 
 	export interface ITienIch {

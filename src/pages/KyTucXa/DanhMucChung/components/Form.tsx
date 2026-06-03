@@ -1,10 +1,9 @@
 import UploadFile from '@/components/Upload/UploadFile';
 import SelectLoaiDanhMucChung from '@/pages/KyTucXa/DanhMucChung/components/Select';
-import { KyTucXa } from '@/services/KyTucXa/typing';
 import { buildUpLoadFile } from '@/services/uploadFile';
 import rules from '@/utils/rules';
 import { removeVietnameseTones, resetFieldsForm } from '@/utils/utils';
-import { Button, Card, Col, Form, Input, Row, Spin } from 'antd';
+import { Button, Card, Checkbox, Col, Form, Input, Row, Spin } from 'antd';
 import _ from 'lodash';
 import { useEffect } from 'react';
 import { useModel } from 'umi';
@@ -13,11 +12,20 @@ const FormThemMoi = () => {
 	const { record, setVisibleForm, edit, postModel, putModel, formSubmiting, visibleForm, isView, loading } =
 		useModel('kytucxa.danhmucchung');
 	const [form] = Form.useForm();
+	const maLoai = Form.useWatch('maLoai', form);
 
-	const onFinish = async (values: KyTucXa.ILoaiDanhMucChung) => {
+	const onFinish = async (values: any) => {
 		try {
 			const anh = await buildUpLoadFile(values, 'anh');
 			values.anh = anh;
+
+			if (values.maLoai !== 'TIEN_ICH_PHONG') {
+				delete values.cauHinh;
+			} else if (!values?.cauHinh?.tienIchChung) {
+				values.cauHinh = null;
+			} else {
+				values.cauHinh = { ...(values.cauHinh || {}), tienIchChung: true };
+			}
 
 			if (edit) await putModel(record?._id ?? '', values);
 			else await postModel(values);
@@ -58,6 +66,15 @@ const FormThemMoi = () => {
 								<Input placeholder='Nhập tên' disabled={isView} />
 							</Form.Item>
 						</Col>
+						{maLoai === 'TIEN_ICH_PHONG' && (
+							<Col span={12}>
+								<Form.Item label=' ' colon={false}>
+									<Form.Item name={['cauHinh', 'tienIchChung']} valuePropName='checked' noStyle>
+										<Checkbox disabled={isView}>Tiện ích chung</Checkbox>
+									</Form.Item>
+								</Form.Item>
+							</Col>
+						)}
 						<Col span={24}>
 							<Form.Item name='ghiChu' label='Ghi chú' rules={[...rules.required]}>
 								<Input.TextArea rows={3} placeholder='Nhập ghi chú' disabled={isView} />

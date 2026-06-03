@@ -9,18 +9,19 @@ import { useIntl, useModel } from 'umi';
 import { buildUpLoadMultiFile } from '@/services/uploadFile';
 import SelectKhoanThu from './SelectKhoanThu';
 import { EGioiTinh, ELoaiSinhVienKTX } from '@/services/KyTucXa/constant';
-import SelectTienIch from './SelectTienIch';
 import SelectRoomType from './SelectRoomType';
 
 const FormPhongKTX = () => {
 	const intl = useIntl();
 	const [form] = Form.useForm();
 	const { danhSach: danhSachToaNha, getAllModel: getAllToaNha } = useModel('kytucxa.toa');
+	const { danhSach: danhSachTienIchModel, getAllModel: getAllTienIch } = useModel('kytucxa.danhmucchung');
 	const { record, setVisibleForm, edit, postModel, putModel, formSubmiting, visibleForm } =
 		useModel('kytucxa.phong');
 
 	useEffect(() => {
 		getAllToaNha();
+		getAllTienIch();
 		if (!visibleForm) return;
 		if (record?._id) {
 			const maDanhMucTienIch = record.danhSachTienIch?.map((item: KyTucXa.ITienIch) => item.maDanhMucTienIch) || [];
@@ -28,16 +29,37 @@ const FormPhongKTX = () => {
 				...record,
 				dangKyKyTucXaRule: {
 					...(record?.dangKyKyTucXaRule || {}),
-					quocTichPhong: record?.dangKyKyTucXaRule?.quocTichPhong ? [record.dangKyKyTucXaRule.quocTichPhong] : [],
+					quocTichPhong: record?.dangKyKyTucXaRule?.quocTichPhong,
 				},
-				danhSachTienIch: {
-					maDanhMucTienIch,
-				},
+				tienIchIds: maDanhMucTienIch,
 			});
 		} else {
 			resetFieldsForm(form);
 		}
 	}, [record?._id, visibleForm]);
+
+	const danhSachTienIchPhong = danhSachTienIchModel?.filter((item: KyTucXa.IDanhMucChung) => item.maLoai === 'TIEN_ICH_PHONG') || [];
+
+	useEffect(() => {
+		if (!visibleForm) return;
+
+		const defaultTienIch = danhSachTienIchPhong
+			?.filter(({ cauHinh }: any) => {
+				try {
+					const ch = typeof cauHinh === 'string' ? JSON.parse(cauHinh) : cauHinh;
+					return String(ch?.tienIchChung) === 'true';
+				} catch { return false; }
+			})
+			.map((item: KyTucXa.IDanhMucChung) => item.ma) || [];
+
+		const savedTienIch = record?.danhSachTienIch?.map((item: KyTucXa.ITienIch) => item.maDanhMucTienIch)?.filter(Boolean) || [];
+
+		const finalTienIchIds = savedTienIch.length > 0 ? savedTienIch : defaultTienIch;
+
+		form.setFieldsValue({
+			tienIchIds: finalTienIchIds
+		});
+	}, [visibleForm, danhSachTienIchModel, record]);
 
 	const isView = false;
 
@@ -45,7 +67,7 @@ const FormPhongKTX = () => {
 		try {
 			const danhSachAnh = await buildUpLoadMultiFile(values, 'danhSachAnh');
 			const { dangKyKyTucXaRule, danhSachTienIch, ...restValues } = values as any;
-			const nationalityArray = dangKyKyTucXaRule?.quocTichPhong;
+			const nationality = dangKyKyTucXaRule?.quocTichPhong;
 			
 			const rulePayload = { ...(dangKyKyTucXaRule || {}) };
 			delete rulePayload.quocTichPhong;
@@ -59,7 +81,7 @@ const FormPhongKTX = () => {
 
 			const finalValues = { 
 				...restValues, 
-				quocTichPhong: (nationalityArray && nationalityArray.length > 0) ? nationalityArray[0] : null,
+				quocTichPhong: nationality || null,
 				...rulePayload,
 				danhSachTienIch: formattedTienIch,
 				danhSachAnh: danhSachAnh ?? [] 
@@ -106,43 +128,20 @@ const FormPhongKTX = () => {
 							{intl.formatMessage({ id: 'kytucxa.phong.quyDinhDangKy' })}
 						</div>
 					</Col>
-					<Col xs={24}>
-						<Form.Item name={['dangKyKyTucXaRule', 'quocTichPhong']}>
-							<Checkbox.Group 
+					<Col xs={24} md={8}>
+						<Form.Item name={['dangKyKyTucXaRule', 'quocTichPhong']} label={intl.formatMessage({ id: 'kytucxa.phong.danhChoSinhVien' })}>
+							<Select
 								disabled={isView}
-								onChange={(checkedValues) => {
-									if (checkedValues.length >= 1) {
-										form.setFieldValue(['dangKyKyTucXaRule', 'quocTichPhong'], [checkedValues[checkedValues.length - 1]]);
-									}
-								}}
-								style={{ width: '100%' }}
-							>
-								<Row gutter={[12, 12]}>
-									<Col xs={24} md={12}>
-										<Checkbox value={ELoaiSinhVienKTX.QUOC_TE}>
-											{intl.formatMessage({ id: 'kytucxa.phong.international' })}
-										</Checkbox>
-									</Col>
-									<Col xs={24} md={12}>
-										<Checkbox value={ELoaiSinhVienKTX.VIET_NAM}>
-											{intl.formatMessage({ id: 'kytucxa.phong.vietnamese' })}
-										</Checkbox>
-									</Col>
-								</Row>
-							</Checkbox.Group>
+								placeholder={intl.formatMessage({ id: 'kytucxa.phong.chonQuocTich' })}
+								options={[
+									{ value: ELoaiSinhVienKTX.QUOC_TE, label: intl.formatMessage({ id: 'kytucxa.phong.international' }) },
+									{ value: ELoaiSinhVienKTX.VIET_NAM, label: intl.formatMessage({ id: 'kytucxa.phong.vietnamese' }) },
+								]}
+								allowClear
+							/>
 						</Form.Item>
 					</Col>
-					<Col xs={24}>
-						<Form.Item name='maLoaiPhongKtx' label={intl.formatMessage({ id: 'kytucxa.phong.loaiPhong' })}>
-							<SelectRoomType />
-						</Form.Item>
-					</Col>
-					{/* <Col xs={24} md={12}>
-						<Form.Item name={['dangKyKyTucXaRule', 'maxPerKhoa']} label={intl.formatMessage({ id: 'kytucxa.phong.soSvToiDaMoiKhoa' })}>
-							<InputNumber disabled={isView} min={0} style={{ width: '100%' }} placeholder={intl.formatMessage({ id: 'kytucxa.phong.viDu2' })} />
-						</Form.Item>
-					</Col> */}
-					<Col xs={24} md={12}>
+					<Col xs={24} md={8}>
 						<Form.Item name={['dangKyKyTucXaRule', 'gioiTinh']} label={intl.formatMessage({ id: 'kytucxa.phong.gioiTinhChoPhep' })} rules={[...rules.required]}>
 							<Select
 								disabled={isView}
@@ -155,19 +154,49 @@ const FormPhongKTX = () => {
 							/>
 						</Form.Item>
 					</Col>
-					<Col xs={24} md={12}>
+					<Col xs={24} md={8}>
 						<Form.Item name='soLuongToiDa' label={intl.formatMessage({ id: 'kytucxa.phong.soLuongToiDa' })} rules={[...rules.required]}>
 							<InputNumber disabled={isView} min={1} style={{ width: '100%' }} placeholder={intl.formatMessage({ id: 'kytucxa.phong.nhapSoLuongToiDa' })} />
 						</Form.Item>
 					</Col>
+
 					<Col xs={24}>
-						<Form.Item name={['danhSachTienIch', 'maDanhMucTienIch']} label={intl.formatMessage({ id: 'kytucxa.phong.danhSachTienIch' })}>
-							<SelectTienIch multiple={true} />
-						</Form.Item>
+						<div className='fw500' style={{ marginBottom: 8, marginTop: 12 }}>
+							{intl.formatMessage({ id: 'kytucxa.phong.thongTinPhong' })}
+						</div>
 					</Col>
 					<Col xs={24}>
+						<Form.Item name='maLoaiPhongKtx' label={intl.formatMessage({ id: 'kytucxa.phong.loaiPhong' })}>
+							<SelectRoomType />
+						</Form.Item>
+					</Col>
+					{/* <Col xs={24}>
 						<Form.Item name='cachBoTri' label={intl.formatMessage({ id: 'kytucxa.phong.cachBoTriPhong' })}>
 							<Input disabled={isView} placeholder={intl.formatMessage({ id: 'kytucxa.phong.nhapCachBoTri' })} />
+						</Form.Item>
+					</Col> */}
+					<Col xs={24}>
+						<Form.Item name='tienIchIds' label={intl.formatMessage({ id: 'kytucxa.phong.danhSachTienIch' })}>
+							<Checkbox.Group disabled={isView} style={{ width: '100%' }}>
+								<Row gutter={[12, 12]}>
+									{danhSachTienIchPhong.map((item: KyTucXa.IDanhMucChung) => (
+										<Col span={8} key={item.ma}>
+											<Checkbox value={item.ma}>
+												<span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+													{item.anh && (
+														<img 
+															src={item.anh} 
+															alt='icon' 
+															style={{ width: 18, height: 18, objectFit: 'contain', borderRadius: 2 }} 
+														/>
+													)}
+													{item.ten}
+												</span>
+											</Checkbox>
+										</Col>
+									))}
+								</Row>
+							</Checkbox.Group>
 						</Form.Item>
 					</Col>
 					<Col xs={24} md={12}>
@@ -182,7 +211,7 @@ const FormPhongKTX = () => {
 					</Col>
 					<Col xs={24}>
 						<Form.Item name='moTa' label={intl.formatMessage({ id: 'kytucxa.phong.moTaPhong' })}>
-							<Input.TextArea rows={3} disabled={isView} placeholder={intl.formatMessage({ id: 'kytucxa.phong.nhapMoTaPhong' })} />
+							<Input.TextArea rows={2} disabled={isView} placeholder={intl.formatMessage({ id: 'kytucxa.phong.nhapMoTaPhong' })} />
 						</Form.Item>
 					</Col>
 				</Row>
