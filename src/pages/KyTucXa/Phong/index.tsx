@@ -27,7 +27,7 @@ const PhongKTXPage = () => {
         <ExportPhongKTX key="export" getModel={getModel} danhSachTienIchAll={danhSachTienIchAll} />
     ];
 
-	const columns: IColumn<KyTucXa.IPhongKTX>[] = [
+	const columns: IColumn<KyTucXa.IPhong>[] = [
 		{
 			title: intl.formatMessage({ id: 'kytucxa.phong.maPhong' }),
 			dataIndex: 'ma',
@@ -45,7 +45,7 @@ const PhongKTXPage = () => {
 			dataIndex: 'maToaNha',
 			width: 120,
 			filterType: 'string',
-			render: (val) => danhSachToaNha?.find((item: KyTucXa.IToaKTX) => item?.ma === val)?.ten || '-',
+			render: (val) => danhSachToaNha?.find((item: KyTucXa.IToa) => item?.ma === val)?.ten || '-',
 		},
 		{
 			title: intl.formatMessage({ id: 'kytucxa.phong.sucChua' }),
@@ -67,14 +67,14 @@ const PhongKTXPage = () => {
 			dataIndex: 'maKhoanThuPhong',
 			width: 170,
 			filterType: 'string',
-			render: (val) => danhSachKhoanThu?.find((item: KyTucXa.IKhoanThuKTX) => item?.maMucThu === val)?.ten || '-',
+			render: (val) => danhSachKhoanThu?.find((item: KyTucXa.IKhoanThu) => item?.maMucThu === val)?.ten || '-',
 		},
 		{
 			title: intl.formatMessage({ id: 'kytucxa.phong.tenKhoanThuCoc' }),
 			dataIndex: 'maKhoanThuCoc',
 			width: 170,
 			filterType: 'string',
-			render: (val) => danhSachKhoanThu?.find((item: KyTucXa.IKhoanThuKTX) => item?.maMucThu === val)?.ten || '-',
+			render: (val) => danhSachKhoanThu?.find((item: KyTucXa.IKhoanThu) => item?.maMucThu === val)?.ten || '-',
 		},
 		{
 			title: intl.formatMessage({ id: 'kytucxa.phong.thaoTac' }),

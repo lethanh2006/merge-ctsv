@@ -76,9 +76,9 @@ const FormDotDangKyKTX = () => {
 		});
 	}, [selectedToaNhaIds, allPhong, visibleForm]);
 
-	const onFinish = async (values: KyTucXa.IDotDangKyKTX) => {
-		const { danhSachToaNha, ...restValues } = values as KyTucXa.IDotDangKyKTX;
-		const payload: Partial<KyTucXa.IDotDangKyKTX> = {
+	const onFinish = async (values: KyTucXa.IDotDangKy) => {
+		const { danhSachToaNha, ...restValues } = values as KyTucXa.IDotDangKy;
+		const payload: Partial<KyTucXa.IDotDangKy> = {
 			...restValues,
 			maKhoaNganh: values?.maKhoaNganh ?? [],
 			danhSachToaNha: selectedToaNhaIds,

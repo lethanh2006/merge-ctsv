@@ -1,19 +1,19 @@
-export enum ETrangThaiSinhVienKTX {
+export enum ETrangThaiSinhVien {
 	CHUA_DUYET = 'CHUA_DUYET',
 	DA_DUYET = 'DA_DUYET',
 	KHONG_DUYET = 'KHONG_DUYET',
 }
 
-export const transTrangThaiSinhVienKTX: Record<ETrangThaiSinhVienKTX, string> = {
-	[ETrangThaiSinhVienKTX.CHUA_DUYET]: 'Chưa duyệt',
-	[ETrangThaiSinhVienKTX.DA_DUYET]: 'Đã duyệt',
-	[ETrangThaiSinhVienKTX.KHONG_DUYET]: 'Không duyệt',
+export const transTrangThaiSinhVien: Record<ETrangThaiSinhVien, string> = {
+	[ETrangThaiSinhVien.CHUA_DUYET]: 'Chưa duyệt',
+	[ETrangThaiSinhVien.DA_DUYET]: 'Đã duyệt',
+	[ETrangThaiSinhVien.KHONG_DUYET]: 'Không duyệt',
 };
 
-export const colorTrangThaiSinhVienKTX: Record<ETrangThaiSinhVienKTX, string> = {
-	[ETrangThaiSinhVienKTX.CHUA_DUYET]: 'blue',
-	[ETrangThaiSinhVienKTX.DA_DUYET]: 'green',
-	[ETrangThaiSinhVienKTX.KHONG_DUYET]: 'orange',
+export const colorTrangThaiSinhVien: Record<ETrangThaiSinhVien, string> = {
+	[ETrangThaiSinhVien.CHUA_DUYET]: 'blue',
+	[ETrangThaiSinhVien.DA_DUYET]: 'green',
+	[ETrangThaiSinhVien.KHONG_DUYET]: 'orange',
 };
 
 export enum EGioiTinh {
@@ -21,7 +21,7 @@ export enum EGioiTinh {
 	NU = 'Nữ',
 }
 
-export enum ELoaiSinhVienKTX {
+export enum ELoaiSinhVien {
 	VIET_NAM = 'Việt Nam',
 	QUOC_TE = 'Quốc tế',
 }

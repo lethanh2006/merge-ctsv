@@ -1,6 +1,6 @@
 import TableBase from '@/components/Table';
 import { type IColumn } from '@/components/Table/typing';
-import type { KyTucXa } from '@/services/KyTucXa/typing';
+import { KyTucXa } from '@/services/KyTucXa/typing';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, Popconfirm, Tooltip } from 'antd';
 import { useIntl, useModel } from 'umi';
@@ -11,7 +11,7 @@ const CauHinhKhoanThuKTXPage = () => {
     const intl = useIntl();
     const { getModel, page, limit, deleteModel, handleEdit } = useModel('kytucxa.khoanthu');
 
-    const columns: IColumn<KyTucXa.IKhoanThuKTX>[] = [
+    const columns: IColumn<KyTucXa.IKhoanThu>[] = [
         {
             title: intl.formatMessage({ id: 'kytucxa.khoanthu.tenKhoanThu' }),
             dataIndex: 'ten',

@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { useIntl, useModel } from 'umi';
 import { buildUpLoadMultiFile } from '@/services/uploadFile';
 import SelectKhoanThu from './SelectKhoanThu';
-import { EGioiTinh, ELoaiSinhVienKTX } from '@/services/KyTucXa/constant';
+import { EGioiTinh, ELoaiSinhVien } from '@/services/KyTucXa/constant';
 import SelectRoomType from './SelectRoomType';
 
 const FormPhongKTX = () => {
@@ -63,7 +63,7 @@ const FormPhongKTX = () => {
 
 	const isView = false;
 
-	const onFinish = async (values: KyTucXa.IPhongKTX) => {
+	const onFinish = async (values: KyTucXa.IPhong) => {
 		try {
 			const danhSachAnh = await buildUpLoadMultiFile(values, 'danhSachAnh');
 			const { dangKyKyTucXaRule, danhSachTienIch, tienIchIds, ...restValues } = values as any;
@@ -105,7 +105,7 @@ const FormPhongKTX = () => {
 						<Col xs={24}>
 							<div style={{ marginBottom: 12, padding: '8px 12px', background: '#f5f5f5', borderRadius: 6 }}>
 								<span style={{ fontWeight: 500 }}>{intl.formatMessage({ id: 'kytucxa.phong.tenPhong' })}: </span>{record?.ten}
-								{record?.maToaNha && <span style={{ marginLeft: 16 }}><span style={{ fontWeight: 500 }}>{intl.formatMessage({ id: 'kytucxa.phong.toaNha' })}: </span>{danhSachToaNha?.find((item: KyTucXa.IToaKTX) => item?.ma === record?.maToaNha)?.ten || '-'}</span>}
+								{record?.maToaNha && <span style={{ marginLeft: 16 }}><span style={{ fontWeight: 500 }}>{intl.formatMessage({ id: 'kytucxa.phong.toaNha' })}: </span>{danhSachToaNha?.find((item: KyTucXa.IToa) => item?.ma === record?.maToaNha)?.ten || '-'}</span>}
 							</div>
 						</Col>
 					)}
@@ -134,8 +134,8 @@ const FormPhongKTX = () => {
 								disabled={isView}
 								placeholder={intl.formatMessage({ id: 'kytucxa.phong.chonQuocTich' })}
 								options={[
-									{ value: ELoaiSinhVienKTX.QUOC_TE, label: intl.formatMessage({ id: 'kytucxa.phong.international' }) },
-									{ value: ELoaiSinhVienKTX.VIET_NAM, label: intl.formatMessage({ id: 'kytucxa.phong.vietnamese' }) },
+									{ value: ELoaiSinhVien.QUOC_TE, label: intl.formatMessage({ id: 'kytucxa.phong.international' }) },
+									{ value: ELoaiSinhVien.VIET_NAM, label: intl.formatMessage({ id: 'kytucxa.phong.vietnamese' }) },
 								]}
 								allowClear
 							/>

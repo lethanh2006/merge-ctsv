@@ -1,14 +1,14 @@
-import type { ETrangThaiDotDangKyKTX, ETrangThaiPhong, ETrangThaiSinhVienKTX, EGioiTinh, ELoaiKhoanThu, ERuleType, ETrangThaiCheckIn } from './constant';
+import type { ETrangThaiDotDangKy, ETrangThaiPhong, ETrangThaiSinhVien, EGioiTinh, ELoaiKhoanThu, ERuleType, ETrangThaiCheckIn } from './constant';
 
 declare module KyTucXa {
-	export interface IToaKTX {
+	export interface IToa {
 		_id: string;
 		ma: string;
 		ten: string;
 		diaChi: string;
 	}
 
-	export interface IPhongKTX {
+	export interface IPhong {
 		_id: string;
 		ma: string;
 		ten?: string;
@@ -34,7 +34,7 @@ declare module KyTucXa {
 		};
 	}
 
-	export interface IKhoanThuKTX {
+	export interface IKhoanThu {
 		_id: string;
 		maNamHoc: string;
 		ten: string;
@@ -60,7 +60,7 @@ declare module KyTucXa {
 		donViTinh: string;
 	}
 
-	export interface IMucThuKTX {
+	export interface IMucThu {
 		_id: string;
 		ma: string;
 		name: string;
@@ -84,7 +84,7 @@ declare module KyTucXa {
 		soLuong: number;
 	}
 
-	export interface IDotDangKyKTX {
+	export interface IDotDangKy {
         _id: string;
         tenDot: string;
         maHocKy: string;

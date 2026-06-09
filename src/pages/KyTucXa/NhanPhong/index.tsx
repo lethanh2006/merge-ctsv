@@ -84,14 +84,14 @@ const NhanPhongKTXPage = () => {
             dataIndex: 'maPhong',
             width: 120,
             filterType: 'string',
-            render: (val) => danhSachPhong?.find((item: KyTucXa.IPhongKTX) => item?.ma === val)?.ten || val || '-',
+            render: (val) => danhSachPhong?.find((item: KyTucXa.IPhong) => item?.ma === val)?.ten || val || '-',
         },
         {
             title: intl.formatMessage({ id: 'kytucxa.nhanphong.tenToaNha' }),
             dataIndex: 'maToaNha',
             width: 140,
             filterType: 'string',
-            render: (val) => danhSachToa?.find((item: KyTucXa.IToaKTX) => item?.ma === val)?.ten || val || '-',
+            render: (val) => danhSachToa?.find((item: KyTucXa.IToa) => item?.ma === val)?.ten || val || '-',
         },
         {
             title: intl.formatMessage({ id: 'kytucxa.nhanphong.ngayBatDau' }),
