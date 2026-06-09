@@ -75,4 +75,5 @@ export default {
     
     'kytucxa.phong.tapTin': 'Tập tin',
     'kytucxa.phong.xemTruocAnh': 'Xem trước ảnh',
+    'kytucxa.phong.keoThaAnh': 'Kéo thả để sắp xếp thứ tự ảnh.',
 };

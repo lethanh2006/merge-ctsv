@@ -116,11 +116,11 @@ const FormPhongKTX = () => {
 							extra={
 								<div style={{ marginTop: 8, color: '#fa8c16', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}>
 									<InfoCircleOutlined style={{ fontSize: '14px', color: '#fa8c16' }} />
-									<span>{intl.formatMessage({ id: 'kytucxa.phong.anhDauTienThongBao' })} <b>{intl.formatMessage({ id: 'kytucxa.phong.anhDaiDien' })}</b> {intl.formatMessage({ id: 'kytucxa.phong.hienThiTongQuan' })}</span>
+									<span>{intl.formatMessage({ id: 'kytucxa.phong.anhDauTienThongBao' })} <b>{intl.formatMessage({ id: 'kytucxa.phong.anhDaiDien' })}</b> {intl.formatMessage({ id: 'kytucxa.phong.hienThiTongQuan' })} {intl.formatMessage({ id: 'kytucxa.phong.keoThaAnh' })}</span>
 								</div>
 							}
 						>
-							<UploadFile maxCount={5} accept='image/*' disabled={isView} otherProps={{ listType: 'picture-card' }} />
+							<UploadFile maxCount={5} accept='image/*' disabled={isView} otherProps={{ listType: 'picture-card' }} sortable />
 						</Form.Item>
 					</Col>
 					<Col xs={24}>

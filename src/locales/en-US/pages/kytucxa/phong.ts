@@ -75,4 +75,5 @@ export default {
     
     'kytucxa.phong.tapTin': 'File',
     'kytucxa.phong.xemTruocAnh': 'Preview Image',
+    'kytucxa.phong.keoThaAnh': 'Drag to reorder images.',
 };

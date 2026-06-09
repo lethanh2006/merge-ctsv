@@ -2,7 +2,7 @@ import { blobToBase64, getNameFile } from '@/utils/utils';
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { Button, Image, Upload, message } from 'antd';
 import type { RcFile } from 'antd/es/upload';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Resizer from 'react-image-file-resizer';
 import { useIntl } from 'umi';
 import PreviewFile from '@/components/PreviewFile';
@@ -10,7 +10,7 @@ import ModalExpandable from '@/components/Table/ModalExpandable';
 import '@/components/Upload/UploadAvatar.less';
 import type { TFileProps, TResizeProps, TUploadProps } from '@/components/Upload/typing';
 
-const UploadImageKTX: React.FC<TUploadProps> = ({
+const UploadImageKTX: React.FC<TUploadProps & { sortable?: boolean }> = ({
     value,
     onChange,
     otherProps,
@@ -29,6 +29,7 @@ const UploadImageKTX: React.FC<TUploadProps> = ({
     isLandscapeAvatar,
     hasPreviewFile = true,
     isWidescreen,
+    sortable = false,
     ...props
 }) => {
     const intl = useIntl();
@@ -36,6 +37,8 @@ const UploadImageKTX: React.FC<TUploadProps> = ({
     const [fileList, setFileList] = useState<any[]>();
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
+    const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
+    const dragIndexRef = useRef<number | null>(null);
     const resizeProps: TResizeProps | undefined = typeof resize === 'boolean' ? {} : resize;
     const showImage = isAvatar || isAvatarSmall || isLandscapeAvatar || isWidescreen || otherProps?.listType === 'picture-card';
 
@@ -140,6 +143,29 @@ const UploadImageKTX: React.FC<TUploadProps> = ({
         }
     };
 
+    /** Xử lý kéo thả để sắp xếp lại thứ tự ảnh */
+    const handleDragStart = (index: number) => {
+        dragIndexRef.current = index;
+    };
+
+    const handleDrop = (e: React.DragEvent, dropIndex: number) => {
+        e.preventDefault();
+        setDragOverIndex(null);
+        const fromIndex = dragIndexRef.current;
+        if (fromIndex === null || fromIndex === dropIndex) return;
+        const newList = [...(fileList || [])];
+        const [moved] = newList.splice(fromIndex, 1);
+        newList.splice(dropIndex, 0, moved);
+        dragIndexRef.current = null;
+        setFileList(newList);
+        if (onChange) onChange({ fileList: newList });
+    };
+
+    const handleDragEnd = () => {
+        dragIndexRef.current = null;
+        setDragOverIndex(null);
+    };
+
     const Extra = () =>
         isDisabled ? null : (
             <small style={{ color: '#999' }}>
@@ -197,9 +223,51 @@ const UploadImageKTX: React.FC<TUploadProps> = ({
                     fileList={fileList}
                     onChange={handleChange}
                     style={{ width: '100%' }}
-                    multiple={maxCount > 1}
+                    multiple={false}
                     accept='image/*'
                     onPreview={handlePreviewImage}
+                    itemRender={sortable && !isDisabled ? (originNode, file, currFileList) => {
+                        const index = currFileList.indexOf(file);
+                        const isDragOver = dragOverIndex === index;
+                        return (
+                            <div
+                                draggable
+                                onDragStart={(e) => {
+                                    e.stopPropagation();
+                                    handleDragStart(index);
+                                }}
+                                onDragOver={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    setDragOverIndex(index);
+                                }}
+                                onDragLeave={(e) => {
+                                    e.stopPropagation();
+                                    setDragOverIndex(null);
+                                }}
+                                onDrop={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    handleDrop(e, index);
+                                }}
+                                onDragEnd={(e) => {
+                                    e.stopPropagation();
+                                    handleDragEnd();
+                                }}
+                                style={{
+                                    position: 'relative',
+                                    width: '100%',
+                                    height: '100%',
+                                    cursor: 'grab',
+                                    outline: isDragOver ? '2px dashed #1677ff' : undefined,
+                                    borderRadius: 8,
+                                    boxSizing: 'border-box',
+                                }}
+                            >
+                                {originNode}
+                            </div>
+                        );
+                    } : undefined}
                     {...otherProps}
                 >
                     {!isDisabled && (!fileList || fileList.length < maxCount) ? (
