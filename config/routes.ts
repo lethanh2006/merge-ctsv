@@ -864,6 +864,11 @@
 						path: 'dot-dang-ky',
 						component: 'KyTucXa/DotDangKy',
 					},
+					{
+						name: 'NhanPhong',
+						path: 'nhan-phong',
+						component: 'KyTucXa/NhanPhong',
+					},
 				],
 			},
 

@@ -37,6 +37,7 @@ export default {
 	'menu.DanhMuc.KyTucXa.DotDangKy': 'Đợt đăng ký',
 	'menu.DanhMuc.KyTucXa.KhoanThu': 'Khoản thu',
 	'menu.DanhMuc.KyTucXa.DanhMucChung': 'Danh mục chung',
+	'menu.DanhMuc.KyTucXa.NhanPhong': 'Nhận phòng',
 	'menu.DanhMuc.CapKyLuat': 'Cấp kỷ luật',
 	'menu.DanhMuc.HinhThucKyLuat': 'Hình thức kỷ luật',
 	'menu.DanhMuc.LoaiKyLuat': 'Loại kỷ luật',

@@ -1,4 +1,4 @@
-import type { ETrangThaiDotDangKyKTX, ETrangThaiPhong, ETrangThaiSinhVienKTX, EGioiTinh, ELoaiKhoanThu, ERuleType } from './constant';
+import type { ETrangThaiDotDangKyKTX, ETrangThaiPhong, ETrangThaiSinhVienKTX, EGioiTinh, ELoaiKhoanThu, ERuleType, ETrangThaiCheckIn } from './constant';
 
 declare module KyTucXa {
 	export interface IToaKTX {
@@ -108,6 +108,20 @@ declare module KyTucXa {
 		dataPartitionCode: string | null;
 		createdAt?: string;
 		updatedAt?: string;
+	}
+
+	export interface ICheckInSinhVien {
+		_id: string,
+		ssoId: string,
+		maSinhVien: string,
+		hoTen: string,
+		maPhong: string,
+		maToaNha: string,
+		ngayBatDau: string,
+		ngayKetThuc: string,
+		trangThai: ETrangThaiCheckIn,
+		dangKyId: string,
+		ghiChu: string
 	}
 
 }

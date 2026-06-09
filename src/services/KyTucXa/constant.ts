@@ -76,3 +76,8 @@ export const loaiDoiTuongOptions = Object.values(ELoaiDoiTuong).map((v) => ({
 	value: v,
 	label: transLoaiDoiTuong[v],
 }));
+
+export enum ETrangThaiCheckIn {
+	DANG_O = 'Đang ở',
+	DA_RA = 'Đã ra',
+}

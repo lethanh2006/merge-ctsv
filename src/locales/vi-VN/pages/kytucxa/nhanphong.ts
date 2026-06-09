@@ -1,0 +1,17 @@
+export default {
+    'kytucxa.nhanphong.title': 'Quản lý nhận phòng',
+    'kytucxa.nhanphong.chuaNhanPhong': 'Chưa nhận phòng',
+    'kytucxa.nhanphong.checkinSuccess': 'Xác nhận check-in thành công',
+    'kytucxa.nhanphong.confirmCheckinNhieu': 'Xác nhận check-in {count} sinh viên?',
+    'kytucxa.nhanphong.confirmCheckinDon': 'Xác nhận check-in sinh viên này?',
+    'kytucxa.nhanphong.btnCheckinNhieu': 'Xác nhận check-in ({count})',
+    'kytucxa.nhanphong.xacNhan': 'Xác nhận',
+    'kytucxa.nhanphong.huy': 'Hủy',
+    'kytucxa.nhanphong.maSinhVien': 'Mã sinh viên',
+    'kytucxa.nhanphong.hoTen': 'Họ tên',
+    'kytucxa.nhanphong.tenPhong': 'Tên phòng',
+    'kytucxa.nhanphong.tenToaNha': 'Tên tòa nhà',
+    'kytucxa.nhanphong.ngayBatDau': 'Ngày bắt đầu',
+    'kytucxa.nhanphong.ngayKetThuc': 'Ngày kết thúc',
+    'kytucxa.nhanphong.trangThai': 'Trạng thái',
+};
