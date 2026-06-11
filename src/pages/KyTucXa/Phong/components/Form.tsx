@@ -170,11 +170,6 @@ const FormPhongKTX = () => {
 							<SelectRoomType />
 						</Form.Item>
 					</Col>
-					<Col xs={8}>
-						<Form.Item name='soPhongTam' label={intl.formatMessage({ id: 'kytucxa.phong.soPhongTam' })}>
-							<InputNumber disabled={isView} min={1} style={{ width: '100%' }} placeholder={intl.formatMessage({ id: 'kytucxa.phong.nhapSoPhongTam' })} />
-						</Form.Item>
-					</Col>
 					<Col xs={24}>
 						<Form.Item name='tienIchIds' label={intl.formatMessage({ id: 'kytucxa.phong.danhSachTienIch' })}>
 							<Checkbox.Group disabled={isView} style={{ width: '100%' }}>
