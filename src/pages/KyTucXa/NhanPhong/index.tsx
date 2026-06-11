@@ -99,7 +99,7 @@ const NhanPhongKTXPage = () => {
             width: 120,
             align: 'center',
             sortable: true,
-            render: (value) => (value ? dayjs(value).format('HH:mm DD/MM/YYYY') : '--'),
+            render: (value) => (value ? dayjs(value).format('DD/MM/YYYY') : '--'),
         },
         {
             title: intl.formatMessage({ id: 'kytucxa.nhanphong.ngayKetThuc' }),
@@ -107,7 +107,7 @@ const NhanPhongKTXPage = () => {
             width: 120,
             align: 'center',
             sortable: true,
-            render: (value) => (value ? dayjs(value).format('HH:mm DD/MM/YYYY') : '--'),
+            render: (value) => (value ? dayjs(value).format('DD/MM/YYYY') : '--'),
         },
         {
             title: intl.formatMessage({ id: 'kytucxa.nhanphong.trangThai' }),

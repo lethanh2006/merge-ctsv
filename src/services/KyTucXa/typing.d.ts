@@ -24,6 +24,7 @@ declare module KyTucXa {
 		danhSachAnh?: string[];
 		danhSachTienIch: ITienIch[];
 		maToaNha?: string;
+		soPhongTam?: number;
 		
 		dangKyKyTucXaRule?: {
 			_id?: string;
