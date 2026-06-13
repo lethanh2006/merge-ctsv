@@ -1,12 +1,12 @@
 import TableBase from '@/components/Table';
 import ButtonExtend from '@/components/Table/ButtonExtend';
 import { type IColumn } from '@/components/Table/typing';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Popconfirm, Image } from 'antd';
-import { useEffect, useMemo } from 'react';
-import { useModel, useIntl } from 'umi';
-import Form from './components/Form';
 import { KyTucXa } from '@/services/KyTucXa/typing';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { Image, Popconfirm } from 'antd';
+import { useEffect, useMemo } from 'react';
+import { useIntl, useModel } from 'umi';
+import Form from './components/Form';
 
 const DanhMucChungPage = () => {
 	const intl = useIntl();
@@ -45,7 +45,17 @@ const DanhMucChungPage = () => {
 			dataIndex: 'anh',
 			width: 150,
 			filterType: 'string',
-			render: (val: string) => val ? <Image src={val} width={30} height={30} style={{ objectFit: 'contain' }} /> : null,
+			render: (val: string) =>
+				val ? <Image src={val} width={30} height={30} style={{ objectFit: 'contain' }} /> : null,
+		},
+		{
+			title: intl.formatMessage({ id: 'kytucxa.danhmucchung.loaitienich' }),
+			dataIndex: 'cauHinh',
+			width: 150,
+			render: (val, record) =>
+				record?.cauHinh?.tienIchChung
+					? intl.formatMessage({ id: 'kytucxa.danhmucchung.tienichchung' })
+					: intl.formatMessage({ id: 'kytucxa.danhmucchung.tienichrieng' }),
 		},
 		{
 			title: intl.formatMessage({ id: 'kytucxa.danhmucchung.ghichu' }),
@@ -59,13 +69,23 @@ const DanhMucChungPage = () => {
 			fixed: 'right',
 			render: (val, record) => (
 				<>
-					<ButtonExtend tooltip={intl.formatMessage({ id: 'kytucxa.danhmucchung.edit' })} onClick={() => handleEdit(record)} type='link' icon={<EditOutlined />} />
+					<ButtonExtend
+						tooltip={intl.formatMessage({ id: 'kytucxa.danhmucchung.edit' })}
+						onClick={() => handleEdit(record)}
+						type='link'
+						icon={<EditOutlined />}
+					/>
 					<Popconfirm
 						onConfirm={() => deleteModel(record._id, getModel)}
 						title={intl.formatMessage({ id: 'kytucxa.danhmucchung.xacnhanxoa' })}
 						placement='topRight'
 					>
-						<ButtonExtend tooltip={intl.formatMessage({ id: 'kytucxa.danhmucchung.delete' })} danger type='link' icon={<DeleteOutlined />} />
+						<ButtonExtend
+							tooltip={intl.formatMessage({ id: 'kytucxa.danhmucchung.delete' })}
+							danger
+							type='link'
+							icon={<DeleteOutlined />}
+						/>
 					</Popconfirm>
 				</>
 			),

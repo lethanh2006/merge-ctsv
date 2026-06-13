@@ -6,7 +6,7 @@ import { removeVietnameseTones, resetFieldsForm } from '@/utils/utils';
 import { Button, Card, Checkbox, Col, Form, Input, Row, Spin } from 'antd';
 import _ from 'lodash';
 import { useEffect } from 'react';
-import { useModel, useIntl } from 'umi';
+import { useIntl, useModel } from 'umi';
 
 const FormThemMoi = () => {
 	const intl = useIntl();
@@ -39,15 +39,28 @@ const FormThemMoi = () => {
 	useEffect(() => {
 		if (!visibleForm) resetFieldsForm(form);
 		else if (record?._id) form.setFieldsValue({ ...record });
+		else {
+			form.setFieldsValue({ maLoai: 'TIEN_ICH_PHONG' });
+		}
 	}, [record?._id, visibleForm]);
 
 	return (
-		<Card title={edit ? intl.formatMessage({ id: 'kytucxa.danhmucchung.editTitle' }) : intl.formatMessage({ id: 'kytucxa.danhmucchung.addTitle' })}>
+		<Card
+			title={
+				edit
+					? intl.formatMessage({ id: 'kytucxa.danhmucchung.editTitle' })
+					: intl.formatMessage({ id: 'kytucxa.danhmucchung.addTitle' })
+			}
+		>
 			<Spin spinning={loading}>
 				<Form form={form} onFinish={onFinish} layout='vertical'>
 					<Row gutter={16}>
 						<Col span={12}>
-							<Form.Item name='ma' label={intl.formatMessage({ id: 'kytucxa.danhmucchung.ma' })} rules={[...rules.required]}>
+							<Form.Item
+								name='ma'
+								label={intl.formatMessage({ id: 'kytucxa.danhmucchung.ma' })}
+								rules={[...rules.required]}
+							>
 								<Input
 									placeholder={intl.formatMessage({ id: 'kytucxa.danhmucchung.nhapma' })}
 									autoFocus
@@ -59,12 +72,20 @@ const FormThemMoi = () => {
 							</Form.Item>
 						</Col>
 						<Col span={12}>
-							<Form.Item name='maLoai' label={intl.formatMessage({ id: 'kytucxa.danhmucchung.maloai' })} rules={[...rules.required]}>
+							<Form.Item
+								name='maLoai'
+								label={intl.formatMessage({ id: 'kytucxa.danhmucchung.maloai' })}
+								rules={[...rules.required]}
+							>
 								<SelectLoaiDanhMucChung disabled={edit || isView} selectMa />
 							</Form.Item>
 						</Col>
 						<Col span={12}>
-							<Form.Item name='ten' label={intl.formatMessage({ id: 'kytucxa.danhmucchung.ten' })}>
+							<Form.Item
+								name='ten'
+								label={intl.formatMessage({ id: 'kytucxa.danhmucchung.ten' })}
+								rules={[...rules.required]}
+							>
 								<Input placeholder={intl.formatMessage({ id: 'kytucxa.danhmucchung.nhapten' })} disabled={isView} />
 							</Form.Item>
 						</Col>
@@ -72,14 +93,20 @@ const FormThemMoi = () => {
 							<Col span={12}>
 								<Form.Item label=' ' colon={false}>
 									<Form.Item name={['cauHinh', 'tienIchChung']} valuePropName='checked' noStyle>
-										<Checkbox disabled={isView}>{intl.formatMessage({ id: 'kytucxa.danhmucchung.tienichchung' })}</Checkbox>
+										<Checkbox disabled={isView}>
+											{intl.formatMessage({ id: 'kytucxa.danhmucchung.tienichchung' })}
+										</Checkbox>
 									</Form.Item>
 								</Form.Item>
 							</Col>
 						)}
 						<Col span={24}>
-							<Form.Item name='ghiChu' label={intl.formatMessage({ id: 'kytucxa.danhmucchung.ghichu' })} rules={[...rules.required]}>
-								<Input.TextArea rows={3} placeholder={intl.formatMessage({ id: 'kytucxa.danhmucchung.nhapghichu' })} disabled={isView} />
+							<Form.Item name='ghiChu' label={intl.formatMessage({ id: 'kytucxa.danhmucchung.ghichu' })}>
+								<Input.TextArea
+									rows={3}
+									placeholder={intl.formatMessage({ id: 'kytucxa.danhmucchung.nhapghichu' })}
+									disabled={isView}
+								/>
 							</Form.Item>
 						</Col>
 						<Col span={24}>
@@ -91,10 +118,16 @@ const FormThemMoi = () => {
 					<div style={{ display: 'flex', justifyContent: 'center' }}>
 						{!isView ? (
 							<Button style={{ marginRight: 8 }} type='primary' htmlType='submit' loading={formSubmiting}>
-								{!edit ? intl.formatMessage({ id: 'kytucxa.danhmucchung.add' }) : intl.formatMessage({ id: 'kytucxa.danhmucchung.save' })}
+								{!edit
+									? intl.formatMessage({ id: 'kytucxa.danhmucchung.add' })
+									: intl.formatMessage({ id: 'kytucxa.danhmucchung.save' })}
 							</Button>
 						) : null}
-						<Button onClick={() => setVisibleForm(false)}>{isView ? intl.formatMessage({ id: 'kytucxa.danhmucchung.close' }) : intl.formatMessage({ id: 'kytucxa.danhmucchung.cancel' })}</Button>
+						<Button onClick={() => setVisibleForm(false)}>
+							{isView
+								? intl.formatMessage({ id: 'kytucxa.danhmucchung.close' })
+								: intl.formatMessage({ id: 'kytucxa.danhmucchung.cancel' })}
+						</Button>
 					</div>
 				</Form>
 			</Spin>

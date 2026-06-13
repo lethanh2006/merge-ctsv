@@ -17,6 +17,8 @@ export default {
     'kytucxa.danhmucchung.maloai': 'Loại danh mục',
     'kytucxa.danhmucchung.nhapten': 'Nhập tên',
     'kytucxa.danhmucchung.tienichchung': 'Tiện ích chung',
+    'kytucxa.danhmucchung.tienichrieng': 'Tiện ích riêng',
+    'kytucxa.danhmucchung.loaitienich': 'Loại tiện ích',
     'kytucxa.danhmucchung.nhapghichu': 'Nhập ghi chú',
     'kytucxa.danhmucchung.anhicon': 'Ảnh Icon',
     'kytucxa.danhmucchung.add': 'Thêm mới',
