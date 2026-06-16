@@ -19,7 +19,6 @@ const ExportPhongKTX: React.FC<IExportProps> = ({ getModel, danhSachTienIchAll }
         { label: intl.formatMessage({ id: 'kytucxa.phong.maToaNha' }), value: 'maToaNha' },
         { label: intl.formatMessage({ id: 'kytucxa.phong.sucChua' }), value: 'soLuongToiDa' },
         { label: intl.formatMessage({ id: 'kytucxa.phong.dangO' }), value: 'soLuongHienTai' },
-        { label: intl.formatMessage({ id: 'kytucxa.phong.cachBoTri' }), value: 'cachBoTri' },
         { label: intl.formatMessage({ id: 'kytucxa.phong.moTa' }), value: 'moTa' },
         { label: intl.formatMessage({ id: 'kytucxa.phong.maKhoanThuPhong' }), value: 'maKhoanThuPhong' },
         { label: intl.formatMessage({ id: 'kytucxa.phong.maKhoanThuCoc' }), value: 'maKhoanThuCoc' },
@@ -50,7 +49,6 @@ const ExportPhongKTX: React.FC<IExportProps> = ({ getModel, danhSachTienIchAll }
                 if (selectedFields.includes('maToaNha')) baseRow[intl.formatMessage({ id: 'kytucxa.phong.maToaNha' })] = row.maToaNha;
                 if (selectedFields.includes('soLuongToiDa')) baseRow[intl.formatMessage({ id: 'kytucxa.phong.sucChua' })] = row.soLuongToiDa;
                 if (selectedFields.includes('soLuongHienTai')) baseRow[intl.formatMessage({ id: 'kytucxa.phong.dangO' })] = row.soLuongHienTai;
-                if (selectedFields.includes('cachBoTri')) baseRow[intl.formatMessage({ id: 'kytucxa.phong.cachBoTri' })] = row.cachBoTri;
                 if (selectedFields.includes('moTa')) baseRow[intl.formatMessage({ id: 'kytucxa.phong.moTa' })] = row.moTa;
                 if (selectedFields.includes('maKhoanThuPhong')) baseRow[intl.formatMessage({ id: 'kytucxa.phong.maKhoanThuPhong' })] = row.maKhoanThuPhong;
                 if (selectedFields.includes('maKhoanThuCoc')) baseRow[intl.formatMessage({ id: 'kytucxa.phong.maKhoanThuCoc' })] = row.maKhoanThuCoc;
@@ -118,6 +116,20 @@ const ExportPhongKTX: React.FC<IExportProps> = ({ getModel, danhSachTienIchAll }
             >
                 <div style={{ marginBottom: 12, color: '#888' }}>
                     {intl.formatMessage({ id: 'kytucxa.phong.xuatDuLieu.chonCacTruongDuLieuBanMuonTrichXuat' })}
+                </div>
+                <div style={{ marginBottom: 12, display: 'flex', gap: '8px' }}>
+                    <Button 
+                        size="small" 
+                        onClick={() => setSelectedFields(EXPORT_OPTIONS.map(opt => opt.value))}
+                    >
+                        {intl.formatMessage({ id: 'global.button.chonTatCa', defaultMessage: 'Chọn tất cả' })}
+                    </Button>
+                    <Button 
+                        size="small" 
+                        onClick={() => setSelectedFields([])}
+                    >
+                        {intl.formatMessage({ id: 'global.button.boChonTatCa', defaultMessage: 'Bỏ chọn tất cả' })}
+                    </Button>
                 </div>
                 <Checkbox.Group
                     options={EXPORT_OPTIONS}

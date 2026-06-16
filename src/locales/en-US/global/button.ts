@@ -16,4 +16,6 @@ export default {
 	'global.button.chitiet': 'Chi tiết',
 	'global.button.teptin': 'Xem tệp tin',
 	'global.button.xoa': 'Delete',
+	'global.button.chonTatCa': 'Select all',
+	'global.button.boChonTatCa': 'Deselect all',
 };
