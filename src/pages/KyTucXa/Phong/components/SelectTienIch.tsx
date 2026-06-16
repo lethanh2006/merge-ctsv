@@ -16,7 +16,7 @@ const SelectTienIchKTX = (props: {
     selectMa?: boolean;
 }) => {
     const { value, onChange, multiple, condition, allowClear, style, isSetRecord } = props;
-    const { danhSach, getAllModel, setRecord, loading } = useModel('kytucxa.tienich');
+    const { danhSach, getAllModel, setRecord, loading } = useModel('kytucxa.danhmucchung');
     const intl = useIntl();
 
     useEffect(() => {

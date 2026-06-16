@@ -3,7 +3,7 @@ import { KyTucXa } from '@/services/KyTucXa/typing.d';
 import { ipCsvc } from '@/utils/ip';
 
 export default () => {
-    const objInit = useInitModel<KyTucXa.IDotDangKy>('dot-dang-ky-ky-tuc-xa', undefined, undefined, ipCsvc);
+    const objInit = useInitModel<KyTucXa.ICheckInSinhVien>('dang-ky-ky-tuc-xa/nhan-phong', undefined, undefined, ipCsvc);
 
     return {
         ...objInit,

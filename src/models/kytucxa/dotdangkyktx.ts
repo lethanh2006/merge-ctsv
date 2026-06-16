@@ -4,7 +4,7 @@ import { ipCsvc } from '@/utils/ip';
 import axios from '@/utils/axios';
 
 export default () => {
-    const objInit = useInitModel<KyTucXa.IDotDangKyKTX>('dot-dang-ky-ky-tuc-xa');
+    const objInit = useInitModel<KyTucXa.IDotDangKy>('dot-dang-ky-ky-tuc-xa');
 
     const postSinhVienDangKy = (dotId: string, danhSachMaSinhVien: { maSinhVien: string; hoTen: string, khoaSinhVien: string }[], headers?: any) => {
         const payloadList = (danhSachMaSinhVien || []).map((item) => ({

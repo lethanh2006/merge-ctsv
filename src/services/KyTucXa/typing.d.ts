@@ -1,14 +1,14 @@
-import type { ETrangThaiDotDangKyKTX, ETrangThaiPhong, ETrangThaiSinhVienKTX, ETrangThaiMienDangKyKTX, EGioiTinh, ELoaiKhoanThu, ERuleType } from './constant';
+import type { ETrangThaiDotDangKyKTX, ETrangThaiPhong, ETrangThaiSinhVienKTX, EGioiTinh, ELoaiKhoanThu, ERuleType } from './constant';
 
 declare module KyTucXa {
-	export interface IToaKTX {
+	export interface IToa {
 		_id: string;
 		ma: string;
 		ten: string;
 		diaChi: string;
 	}
 
-	export interface IPhongKTX {
+	export interface IPhong {
 		_id: string;
 		ma: string;
 		ten?: string;
@@ -24,6 +24,7 @@ declare module KyTucXa {
 		danhSachAnh?: string[];
 		danhSachTienIch: ITienIch[];
 		maToaNha?: string;
+		soPhongTam?: number;
 
 		dangKyKyTucXaRule?: {
 			_id?: string;
@@ -34,7 +35,7 @@ declare module KyTucXa {
 		};
 	}
 
-	export interface IKhoanThuKTX {
+	export interface IKhoanThu {
 		_id: string;
 		maNamHoc: string;
 		ten: string;
@@ -60,7 +61,7 @@ declare module KyTucXa {
 		donViTinh: string;
 	}
 
-	export interface IMucThuKTX {
+	export interface IMucThu {
 		_id: string;
 		ma: string;
 		name: string;
@@ -72,6 +73,11 @@ declare module KyTucXa {
 		maLoai: string;
 		ma: string;
 		ten: string;
+		cauHinh?: {
+			tienIchChung?: boolean;
+		}
+		anh?: string;
+		ghiChu?: string;
 	}
 
 	export interface ITienIch {
@@ -97,7 +103,7 @@ declare module KyTucXa {
 		};
 	}
 
-	export interface IDotDangKyKTX {
+	export interface IDotDangKy {
 		_id: string;
 		tenDot: string;
 		maHocKy: string;

@@ -1,0 +1,17 @@
+export default {
+    'kytucxa.nhanphong.title': 'Check-in Management',
+    'kytucxa.nhanphong.chuaNhanPhong': 'Pending Check-in',
+    'kytucxa.nhanphong.checkinSuccess': 'Check-in confirmed successfully',
+    'kytucxa.nhanphong.confirmCheckinNhieu': 'Confirm check-in for {count} students?',
+    'kytucxa.nhanphong.confirmCheckinDon': 'Confirm check-in for this student?',
+    'kytucxa.nhanphong.btnCheckinNhieu': 'Confirm check-in ({count})',
+    'kytucxa.nhanphong.xacNhan': 'Confirm',
+    'kytucxa.nhanphong.huy': 'Cancel',
+    'kytucxa.nhanphong.maSinhVien': 'Student ID',
+    'kytucxa.nhanphong.hoTen': 'Full Name',
+    'kytucxa.nhanphong.tenPhong': 'Room Name',
+    'kytucxa.nhanphong.tenToaNha': 'Building Name',
+    'kytucxa.nhanphong.ngayBatDau': 'Start Date',
+    'kytucxa.nhanphong.ngayKetThuc': 'End Date',
+    'kytucxa.nhanphong.trangThai': 'Status',
+};

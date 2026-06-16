@@ -36,6 +36,8 @@ export default {
 	'menu.DanhMuc.KyTucXa.Phong': 'Rooms',
 	'menu.DanhMuc.KyTucXa.DotDangKy': 'Registration Periods',
 	'menu.DanhMuc.KyTucXa.KhoanThu': 'Fees',
+	'menu.DanhMuc.KyTucXa.DanhMucChung': 'Categories',
+	'menu.DanhMuc.KyTucXa.NhanPhong': 'Check-in',
 	'menu.DanhMuc.CapKyLuat': 'Disciplinary Levels',
 	'menu.DanhMuc.HinhThucKyLuat': 'Disciplinary Forms',
 	'menu.DanhMuc.LoaiKyLuat': 'Disciplinary Types',

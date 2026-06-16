@@ -1,9 +1,9 @@
 import useInitModel from '@/hooks/useInitModel';
-import type { KyTucXa } from '@/services/KyTucXa/typing';
+import { KyTucXa } from '@/services/KyTucXa/typing';
 import { ipCsvc } from '@/utils/ip';
 
 export default () => {
-    const objInit = useInitModel<KyTucXa.IKhoanThuKTX>('tai-chinh-csvc', undefined, undefined, ipCsvc);
+    const objInit = useInitModel<KyTucXa.IKhoanThu>('tai-chinh-csvc', undefined, undefined, ipCsvc);
 
     return {
         ...objInit,

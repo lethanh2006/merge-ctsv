@@ -12,7 +12,8 @@ const DotDangKy = () => {
 	const { handleEdit, deleteModel, getModel } = useModel('kytucxa.dotdangky');
 
 
-	const columns: IColumn<KyTucXa.IDotDangKyKTX>[] = [
+
+	const columns: IColumn<KyTucXa.IDotDangKy>[] = [
 		{
 			title: 'Tên đợt',
 			dataIndex: 'tenDot',

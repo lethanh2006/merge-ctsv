@@ -194,9 +194,9 @@ const FormDotDangKyKTX = () => {
 			cauHinhKhoaToa:
 				loaiDot === 'Theo khoa'
 					? selectedKhoaRows.map((row) => ({
-							maKhoaSinhVien: row.maKhoaSinhVien ?? row.ma,
-							danhSachToaNha: khoaToaConfig[row.maKhoaSinhVien ?? row.ma] ?? [],
-						}))
+						maKhoaSinhVien: row.maKhoaSinhVien ?? row.ma,
+						danhSachToaNha: khoaToaConfig[row.maKhoaSinhVien ?? row.ma] ?? [],
+					}))
 					: [],
 			hanDuyetMien: values?.hanDuyetMien ? dayjs(values.hanDuyetMien).toISOString() : null,
 			danhSachToaNha: loaiDot === 'Theo danh sách' ? selectedToaNhaIds : [],
