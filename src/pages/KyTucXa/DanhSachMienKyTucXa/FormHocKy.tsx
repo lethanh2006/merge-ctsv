@@ -35,10 +35,8 @@ const FormHocKy = () => {
 
             if (edit) {
                 await putModel(record?._id ?? '', payload);
-                message.success('Cập nhật thành công');
             } else {
                 await postModel(payload);
-                message.success('Tạo mới thành công');
                 form.resetFields();
             }
             setVisibleForm(false);

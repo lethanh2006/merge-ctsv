@@ -137,6 +137,7 @@ export const DanhSachSinhVienPanel: React.FC<DanhSachSinhVienPanelProps> = ({
         if (!selectedSemesterMa) return;
         try {
             let semesterId = activeSemester?._id;
+            let messageShown = false;
 
             if (!semesterId) {
                 const newSemester = (await postModel({
@@ -149,6 +150,7 @@ export const DanhSachSinhVienPanel: React.FC<DanhSachSinhVienPanelProps> = ({
                 if (!semesterId) {
                     throw new Error('Không thể tạo cấu hình học kỳ mới');
                 }
+                messageShown = true;
                 await getAllModel();
             } else {
                 const hasPassed = activeSemester?.hanNopMinhChung && dayjs(activeSemester.hanNopMinhChung).isBefore(dayjs());
@@ -157,6 +159,7 @@ export const DanhSachSinhVienPanel: React.FC<DanhSachSinhVienPanelProps> = ({
                         ...activeSemester,
                         hanNopMinhChung: dayjs().add(1, 'year').toISOString(),
                     });
+                    messageShown = true;
                     await getAllModel();
                 }
             }
@@ -170,12 +173,14 @@ export const DanhSachSinhVienPanel: React.FC<DanhSachSinhVienPanelProps> = ({
             const uniqueNewStudents = newStudents.filter((item) => !existingCodes.has(item.maSinhVien));
             const combinedList = [...existingList, ...uniqueNewStudents];
             await postMienDangKySinhVien(semesterId, combinedList);
-            message.success('Thêm sinh viên thành công');
+            if (!messageShown) {
+                message.success('Thêm mới thành công');
+            }
             setVisibleSelect(false);
             fetchStudents(semesterId);
         } catch (err) {
             console.error(err);
-            message.error('Thêm sinh viên thất bại');
+            message.error('Có lỗi xảy ra');
         }
     };
 
@@ -183,11 +188,11 @@ export const DanhSachSinhVienPanel: React.FC<DanhSachSinhVienPanelProps> = ({
         if (!activeSemester?._id) return;
         try {
             await deleteSinhVien(recordId);
-            message.success('Xóa sinh viên thành công');
+            message.success('Xóa thành công');
             fetchStudents(activeSemester._id);
         } catch (err) {
             console.error(err);
-            message.error('Không thể xóa sinh viên');
+            message.error('Không thể xóa');
         }
     };
 

@@ -73,8 +73,8 @@ const FormDotDangKyKTX = () => {
 			const danhSachToaNha = record?.danhSachToaNha ?? [];
 			const danhSachPhong = record?.danhSachPhong ?? [];
 			const cauHinh = record?.cauHinhKhoaToa ?? [];
-			const khoaNganh = cauHinh.length ? cauHinh.map((item) => item.maKhoaSinhVien) : (record?.maKhoaNganh ?? []);
-			const nextKhoaToaConfig = cauHinh.reduce<Record<string, string[]>>((accumulator, item) => {
+			const khoaNganh = cauHinh.length ? cauHinh.map((item: any) => item.maKhoaSinhVien) : (record?.maKhoaNganh ?? []);
+			const nextKhoaToaConfig = cauHinh.reduce<Record<string, string[]>>((accumulator: any, item: any) => {
 				accumulator[item.maKhoaSinhVien] = item.danhSachToaNha ?? [];
 				return accumulator;
 			}, {});

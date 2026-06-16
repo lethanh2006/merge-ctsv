@@ -103,7 +103,7 @@ declare module KyTucXa {
 		};
 	}
 
-	export interface IDotDangKy {
+	export interface IDotDangKyKTX {
 		_id: string;
 		tenDot: string;
 		maHocKy: string;
