@@ -1,18 +1,19 @@
-import MyDatePicker from '@/components/MyDatePicker';
-import SelectHocKy from '@/pages/HocKy/components/SelectHocKy';
 import rules from '@/utils/rules';
 import { resetFieldsForm } from '@/utils/utils';
-import { Button, Col, Form, Input, Row, message } from 'antd';
-import dayjs from 'dayjs';
-import { useEffect } from 'react';
+import { Button, Col, Form, Input, Row, Card } from 'antd';
+import React, { useEffect } from 'react';
 import { useModel } from 'umi';
-import { UploadMinhChungModal } from './UploadMinhChungModal';
+import UploadFile from '@/components/Upload/UploadFile';
+import { buildUpLoadFile } from '@/services/uploadFile';
 
-const FormSinhVien = () => {
+interface FormSinhVienProps {
+    danhSachId?: string;
+}
+
+const FormSinhVien: React.FC<FormSinhVienProps> = ({ danhSachId }) => {
     const [form] = Form.useForm();
     const { record, visibleForm, edit, setVisibleForm, putModel, postModel, formSubmiting } =
-        useModel('kytucxa.danhsachmienkytucxa');
-
+        useModel('kytucxa.danhsachmiensinhvien');
 
     useEffect(() => {
         if (!visibleForm) resetFieldsForm(form);
@@ -24,7 +25,12 @@ const FormSinhVien = () => {
 
     const onFinish = async (values: any) => {
         try {
-            const payload = { ...values };
+            const fileUrl = await buildUpLoadFile(values, 'urlMinhChung');
+            const payload = {
+                ...values,
+                urlMinhChung: fileUrl || values.urlMinhChung,
+                danhSachId: record?.danhSachId || danhSachId,
+            };
             if (edit) {
                 await putModel(record?._id ?? '', payload);
             } else {
@@ -38,7 +44,7 @@ const FormSinhVien = () => {
     };
 
     return (
-        <div style={{ paddingTop: '12px' }}>
+        <Card title={`${edit ? 'Chỉnh sửa' : 'Thêm mới'} sinh viên`}>
             <Form layout='vertical' onFinish={onFinish} form={form}>
                 <Row gutter={[12, 0]}>
                     <Col span={24} md={12}>
@@ -57,13 +63,13 @@ const FormSinhVien = () => {
                         </Form.Item>
                     </Col>
                     <Col xs={24}>
-                        <Form.Item name='urlMinhChung' label='upload minh chứng ' >
-                            <UploadMinhChungModal />
+                        <Form.Item name='urlMinhChung' label='Upload minh chứng' rules={edit ? [] : [{ required: true, message: 'Vui lòng tải lên file minh chứng!' }]}>
+                            <UploadFile maxCount={1} accept=".pdf,.png,.jpg,.jpeg,.doc,.docx" />
                         </Form.Item>
                     </Col>
                 </Row>
 
-                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px', marginTop: '16px' }}>
+                <div className='form-footer'>
                     <Button onClick={() => setVisibleForm(false)} style={{ borderRadius: 6 }}>
                         Hủy
                     </Button>
@@ -72,8 +78,9 @@ const FormSinhVien = () => {
                     </Button>
                 </div>
             </Form>
-        </div>
+        </Card>
     );
 };
 
 export default FormSinhVien;
+
