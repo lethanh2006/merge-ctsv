@@ -13,7 +13,7 @@ const DotDangKy = () => {
 
 
 
-	const columns: IColumn<KyTucXa.IDotDangKy>[] = [
+	const columns: IColumn<KyTucXa.IDotDangKyKTX>[] = [
 		{
 			title: 'Tên đợt',
 			dataIndex: 'tenDot',

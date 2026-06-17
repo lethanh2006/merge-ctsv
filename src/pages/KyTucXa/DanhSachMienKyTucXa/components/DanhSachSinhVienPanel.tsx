@@ -389,16 +389,16 @@ export const DanhSachSinhVienPanel: React.FC<DanhSachSinhVienPanelProps> = ({
                 </div>
             </TableStaticData>
 
-            <StudentSelectModal
+            {/* <StudentSelectModal
                 open={visibleSelect}
                 onCancel={() => setVisibleSelect(false)}
                 activeSemester={activeSemester}
                 selectedSemesterMa={selectedSemesterMa}
                 existingStudents={students}
                 onOk={handleAddStudentsDone}
-            />
+            /> */}
 
-            <TuChoiModal
+            {/* <TuChoiModal
                 open={actionModalVisible}
                 onCancel={() => {
                     setActionModalVisible(false);
@@ -411,9 +411,9 @@ export const DanhSachSinhVienPanel: React.FC<DanhSachSinhVienPanelProps> = ({
                     setCurrentRecord(null);
                     if (activeSemester?._id) fetchStudents(activeSemester._id);
                 }}
-            />
+            /> */}
 
-            <UploadMinhChungModal
+            {/* <UploadMinhChungModal
                 open={uploadModalVisible}
                 onCancel={() => {
                     setUploadModalVisible(false);
@@ -426,7 +426,7 @@ export const DanhSachSinhVienPanel: React.FC<DanhSachSinhVienPanelProps> = ({
                     setCurrentRecord(null);
                     if (activeSemester?._id) fetchStudents(activeSemester._id);
                 }}
-            />
+            /> */}
         </Card>
     );
 };

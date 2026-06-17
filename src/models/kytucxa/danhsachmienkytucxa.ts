@@ -26,7 +26,6 @@ export default () => {
         return axios.get(`${ipCsvc}/danh-sach-mien-ky-tuc-xa/${danhSachId}/sinh-vien`, { headers });
     };
 
-    // Đã được thêm ở đây ạ!
     const putDonMienKTX = (id: string, body: any, headers?: any) => {
         return axios.put(`${ipCsvc}/danh-sach-mien-ky-tuc-xa/don/${id}`, body, { headers });
     };

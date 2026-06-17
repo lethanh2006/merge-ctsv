@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Col, Modal, Row } from 'antd';
 import { useModel } from '@umijs/max';
 import { DanhSachSinhVienPanel } from './components/DanhSachSinhVienPanel';
-import FormHocKy from './FormHocKy';
+import FormHocKy from './components/FormHocKy';
 
 const DanhSachMienKyTucXa = () => {
     const {
