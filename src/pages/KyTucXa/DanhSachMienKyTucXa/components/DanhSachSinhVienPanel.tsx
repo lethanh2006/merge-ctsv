@@ -4,7 +4,9 @@ import {
     PlusOutlined,
     DeleteOutlined,
     UploadOutlined,
-    EditOutlined
+    EditOutlined,
+    ImportOutlined,
+    ExportOutlined
 } from '@ant-design/icons';
 import { useModel } from '@umijs/max';
 import TableStaticData from '@/components/Table/TableStaticData';
@@ -13,6 +15,10 @@ import { ETrangThaiMienDangKyKTX } from '@/services/KyTucXa/constant';
 import type { KyTucXa } from '@/services/KyTucXa/typing';
 import type { IColumn } from '@/components/Table/typing';
 import { StudentSelectModal } from './StudentSelectModal';
+import { ipCsvc } from '@/utils/ip';
+import axios from '@/utils/axios';
+import * as XLSX from 'xlsx';
+import fileDownload from 'js-file-download';
 import { UploadMinhChungModal } from './UploadMinhChungModal';
 import { TuChoiModal } from './TuChoiModal';
 import SelectHocKy from '@/pages/HocKy/components/SelectHocKy';
@@ -45,7 +51,53 @@ export const DanhSachSinhVienPanel: React.FC<DanhSachSinhVienPanelProps> = ({
     onEditSemester,
     onDeleteSemester,
 }) => {
-    const { handleEdit, deleteModel, getModel } = useModel('kytucxa.danhsachmiensinhvien');
+    const { handleEdit, deleteModel, getModel, danhSach } = useModel('kytucxa.danhsachmiensinhvien');
+    const [visibleSelect, setVisibleSelect] = useState(false);
+
+    const handleAddStudentsDone = async (newStudents: { maSinhVien: string; hoTen: string; khoaSinhVien: string }[]) => {
+        if (!activeSemester?._id) {
+            message.warning('Vui lòng chọn học kỳ/danh sách trước');
+            return;
+        }
+        try {
+            const danhSachId = activeSemester._id;
+            await axios.post(`${ipCsvc}/danh-sach-mien-ky-tuc-xa/${danhSachId}/sinh-vien`, {
+                danhSach: newStudents.map((s) => ({
+                    maSinhVien: s.maSinhVien,
+                    hoTen: s.hoTen,
+                    khoaSinhVien: s.khoaSinhVien || '',
+                })),
+            });
+            message.success('Import sinh viên thành công');
+            setVisibleSelect(false);
+            getModel({ danhSachId });
+        } catch (err) {
+            console.error(err);
+            message.error('Có lỗi xảy ra khi import sinh viên');
+        }
+    };
+
+    const handleExportExcel = () => {
+        if (!danhSach || danhSach.length === 0) {
+            message.warning('Không có dữ liệu để xuất');
+            return;
+        }
+
+        const dataToExport = danhSach.map((item: any, index: number) => ({
+            'TT': index + 1,
+            'Mã sinh viên': item.code || '',
+            'Họ tên': item.fullname || '',
+            'Khoá sinh viên': item.khoaSinhVien || '',
+            'Trạng thái minh chứng': item.trangThaiMinhChung || 'Chờ duyệt',
+        }));
+
+        const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Danh sách');
+        const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+        const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        fileDownload(blob, `Danh sách miễn KTX - HK ${selectedSemesterMa || ''}.xlsx`);
+    };
 
     const columns: IColumn<any>[] = [
         {
@@ -383,9 +435,25 @@ export const DanhSachSinhVienPanel: React.FC<DanhSachSinhVienPanelProps> = ({
                 widthDrawer={900}
                 buttons={{
                     filter: false,
-                    import: true,
-                    export: true,
+                    import: false,
+                    export: false,
                 }}
+                otherButtons={[
+                    <Button
+                        key="btn-import-student"
+                        icon={<ImportOutlined />}
+                        onClick={() => setVisibleSelect(true)}
+                    >
+                        Nhập dữ liệu
+                    </Button>,
+                    <Button
+                        key="btn-export-student"
+                        icon={<ExportOutlined />}
+                        onClick={handleExportExcel}
+                    >
+                        Xuất dữ liệu
+                    </Button>
+                ]}
                 params={{ danhSachId: activeSemester?._id }}
                 dependencies={[activeSemester?._id]}
                 formProps={{ danhSachId: activeSemester?._id }}
@@ -402,6 +470,14 @@ export const DanhSachSinhVienPanel: React.FC<DanhSachSinhVienPanelProps> = ({
                     />
                 </div>
             </TableBase>
+            <StudentSelectModal
+                open={visibleSelect}
+                onCancel={() => setVisibleSelect(false)}
+                activeSemester={activeSemester}
+                selectedSemesterMa={selectedSemesterMa}
+                existingStudents={danhSach || []}
+                onOk={handleAddStudentsDone}
+            />
         </Card>
     );
 };

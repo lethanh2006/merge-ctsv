@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
 import { useModel } from 'umi';
 import UploadFile from '@/components/Upload/UploadFile';
 import { buildUpLoadFile } from '@/services/uploadFile';
+import SelectKhoaSinhVien from '@/pages/DaoTaoV2/NamHoc/KhoaSinhVien/components/Select';
 
 interface FormSinhVienProps {
     danhSachId?: string;
@@ -58,8 +59,8 @@ const FormSinhVien: React.FC<FormSinhVienProps> = ({ danhSachId }) => {
                         </Form.Item>
                     </Col>
                     <Col xs={24}>
-                        <Form.Item name='khoaSinhVien' label='Khoá sinh viên' rules={[...rules.text, ...rules.length(2000)]}>
-                            <Input.TextArea rows={3} placeholder='Nhập khoá sinh viên' style={{ borderRadius: 6 }} />
+                        <Form.Item name='khoaSinhVien' label='Khoá sinh viên' rules={[...rules.required]}>
+                            <SelectKhoaSinhVien selectMa placeholder='Chọn khoá sinh viên' style={{ borderRadius: 6 }} />
                         </Form.Item>
                     </Col>
                     <Col xs={24}>
